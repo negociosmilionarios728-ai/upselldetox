@@ -5,14 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oferta Exclusiva - Método Barriga Zero VIP</title>
-    <meta name="description" content="Acelere seus resultados com o Programa Completo em Vídeo do Método Barriga Zero VIP. Receitas estratégicas, treinos guiados e bônus exclusivos.">
+    <meta name="description" content="Transforme seu acesso Detox7 Pro em uma experiência VIP completa. Receitas estratégicas, treinos de 15 minutos e protocolos detox exclusivos.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://upselldetox.vercel.app/">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Oferta Exclusiva - Método Barriga Zero VIP">
+    <meta property="og:description" content="Acelere seus resultados com o programa VIP completo.">
+    <meta property="og:type" content="website">
     
     <!-- Critical Assets Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- Async Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" media="all">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     
     <style>
@@ -322,7 +329,7 @@ section {
     }
 }
 
-/* Video Carousel */
+/* Video Carousel with CSS Snap - Zero JS Reflow */
 .carousel-section {
     padding: 4rem 0;
     text-align: center;
@@ -332,20 +339,25 @@ section {
     position: relative;
     max-width: 100%;
     margin: 2rem auto;
-    overflow: hidden;
-    padding: 0 1rem;
 }
 
 .carousel-track {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
     gap: 1.5rem;
     padding: 1rem 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
 }
 
 .carousel-item {
-    min-width: 220px;
-    width: 220px;
+    min-width: 280px;
+    width: 280px;
     background: var(--bg-surface);
     border-radius: 24px;
     overflow: hidden;
@@ -353,6 +365,7 @@ section {
     flex-shrink: 0;
     text-align: left;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    scroll-snap-align: center;
 }
 
 .carousel-video {
@@ -383,7 +396,7 @@ section {
 
 .carousel-btn {
     position: absolute;
-    top: 40%; /* Adjusted for taller cards */
+    top: 40%;
     transform: translateY(-50%);
     background: var(--primary);
     color: white;
@@ -397,17 +410,17 @@ section {
     z-index: 10;
     border: none;
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    display: none; /* Hide buttons as snap is native */
+}
+
+@media (min-width: 1024px) {
+    .carousel-btn {
+        display: flex;
+    }
 }
 
 .carousel-btn.prev { left: -10px; }
 .carousel-btn.next { right: -10px; }
-
-@media (min-width: 640px) {
-    .carousel-item {
-        min-width: 280px;
-        width: 280px;
-    }
-}
     </style>
 </head>
 
@@ -495,7 +508,7 @@ section {
             <p class="hero-subheadline">Este é o complemento exato que você precisa para potencializar os resultados que
                 o app Detox7 Pro vai iniciar em você.</p>
 
-            <img src="metodo_barriga_zero_mockup.png" alt="Método Barriga Zero VIP Mockup" class="product-image" width="600" height="600">
+            <img src="metodo_barriga_zero_mockup.png" alt="Mockup do Método Barriga Zero VIP mostrando o conteúdo premium" class="product-image" width="400" height="400" loading="eager" fetchpriority="high">
 
             <div class="glass-card" style="text-align: left;">
                 <h3 style="margin-bottom: 1.5rem; color: var(--primary);">O mecanismo que acelera seus resultados</h3>
@@ -649,51 +662,18 @@ section {
             });
         });
 
-        // Carousel Logic
+        // Carousel Logic with Native Snap
         const track = document.getElementById('carouselTrack');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
-        let index = 0;
-        let itemWidth = 0;
-
-        function updateItemWidth() {
-            const firstItem = document.querySelector('.carousel-item');
-            if (firstItem) {
-                itemWidth = firstItem.offsetWidth + 24; // width + gap
-            }
-        }
-
-        function updateCarousel() {
-            if (itemWidth === 0) updateItemWidth();
-            track.style.transform = `translateX(-${index * itemWidth}px)`;
-        }
 
         nextBtn.addEventListener('click', () => {
-            const items = document.querySelectorAll('.carousel-item').length;
-            const visibleItems = window.innerWidth > 640 ? 2 : 1;
-            if (index < items - visibleItems) {
-                index++;
-                updateCarousel();
-            } else {
-                index = 0; // Loop
-                updateCarousel();
-            }
+            track.scrollBy({ left: 300, behavior: 'smooth' });
         });
 
         prevBtn.addEventListener('click', () => {
-            if (index > 0) {
-                index--;
-                updateCarousel();
-            }
+            track.scrollBy({ left: -300, behavior: 'smooth' });
         });
-
-        window.addEventListener('resize', () => {
-            updateItemWidth();
-            updateCarousel();
-        });
-        
-        // Initial width calculation
-        window.addEventListener('load', updateItemWidth);
     </script>
 </body>
 
