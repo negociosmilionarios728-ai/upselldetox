@@ -426,6 +426,41 @@ section {
 
 .carousel-btn.prev { left: -10px; }
 .carousel-btn.next { right: -10px; }
+
+/* Play Overlay */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    background: rgba(16, 185, 129, 0.85);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.play-overlay i {
+    color: white;
+    font-size: 1.8rem;
+    margin-left: 5px; /* Adjust for optical center of play icon */
+}
+
+.video-wrapper:hover .play-overlay {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: var(--primary);
+}
     </style>
     <!-- UTMify Pixel -->
     <script>
@@ -603,9 +638,14 @@ section {
                 <div class="carousel-track" id="carouselTrack">
                     <!-- Aula 1 -->
                     <div class="carousel-item">
-                        <video class="carousel-video" controls playsinline preload="none">
-                            <source src="molhos para saladas.mp4" type="video/mp4">
-                        </video>
+                        <div class="video-wrapper">
+                            <video class="carousel-video" controls playsinline preload="none" onplay="this.nextElementSibling.style.display='none'" onpause="this.nextElementSibling.style.display='flex'">
+                                <source src="molhos para saladas.mp4" type="video/mp4">
+                            </video>
+                            <div class="play-overlay" onclick="this.previousElementSibling.play()">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
                         <div class="carousel-info">
                             <span class="label">Módulo 1</span>
                             <h4>Aula 1: Molhos para saladas</h4>
@@ -613,9 +653,14 @@ section {
                     </div>
                     <!-- Aula 2 -->
                     <div class="carousel-item">
-                        <video class="carousel-video" controls playsinline preload="none">
-                            <source src="búlgaro.mp4" type="video/mp4">
-                        </video>
+                        <div class="video-wrapper">
+                            <video class="carousel-video" controls playsinline preload="none" onplay="this.nextElementSibling.style.display='none'" onpause="this.nextElementSibling.style.display='flex'">
+                                <source src="búlgaro.mp4" type="video/mp4">
+                            </video>
+                            <div class="play-overlay" onclick="this.previousElementSibling.play()">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
                         <div class="carousel-info">
                             <span class="label">Módulo 2</span>
                             <h4>Aula 2: Agachamento Búlgaro</h4>
@@ -623,9 +668,14 @@ section {
                     </div>
                     <!-- Aula 5 -->
                     <div class="carousel-item">
-                        <video class="carousel-video" controls playsinline preload="none">
-                            <source src="café da manhã.mp4" type="video/mp4">
-                        </video>
+                        <div class="video-wrapper">
+                            <video class="carousel-video" controls playsinline preload="none" onplay="this.nextElementSibling.style.display='none'" onpause="this.nextElementSibling.style.display='flex'">
+                                <source src="café da manhã.mp4" type="video/mp4">
+                            </video>
+                            <div class="play-overlay" onclick="this.previousElementSibling.play()">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
                         <div class="carousel-info">
                             <span class="label">Módulo 1</span>
                             <h4>Aula 5: Receitas para o café da manhã</h4>
